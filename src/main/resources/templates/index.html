@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Sol Nasce para Todos</title>
+    <link rel="icon" type="image/jpeg" th:href="@{/img/favicon.jpeg}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <header th:replace="~{fragmentos :: cabecalho}"></header>
+
+    <main class="container">
+        <section class="hero">
+            <h1>Eles precisam de você. Nós precisamos de você.</h1>
+            <p>Nossa missão: Promover o cuidado, a proteção e a adoção responsável de animais em situação de abandono.</p>
+            <a th:href="@{/pets}" class="btn btn-primary">Quero Adotar</a>
+            <a th:href="@{/contato}" class="btn btn-outline">Como Doar</a>
+        </section>
+    </main>
+</body>
+</html>

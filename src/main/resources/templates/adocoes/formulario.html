@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adoção - Área da ONG</title>
+    <link rel="icon" type="image/jpeg" th:href="@{/img/favicon.jpeg}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <header th:replace="~{fragmentos :: cabecalho}"></header>
+
+    <main class="container area-ong">
+        <nav th:replace="~{fragmentos :: menuOng}"></nav>
+
+        <h1 th:text="${adocao.id == null} ? 'Nova Adoção' : 'Editar Adoção'"></h1>
+
+        <form th:action="@{/adocoes/salvar}" th:object="${adocao}" method="post" class="form-crud">
+            <input type="hidden" th:field="*{id}">
+
+            <label for="data">Data da adoção</label>
+            <input type="date" id="data" th:field="*{data}">
+            <span class="erro" th:if="${#fields.hasErrors('data')}" th:errors="*{data}"></span>
+
+            <!--
+                Correção do roteiro: o th:field aponta para o ID do animal (animal.id)
+                e cada <option> tem como valor o ID (a.id), e não o objeto inteiro.
+            -->
+            <label for="animal">Animal</label>
+            <select id="animal" th:field="*{animal.id}">
+                <option value="">Selecione...</option>
+                <option th:each="a : ${animais}" th:value="${a.id}"
+                        th:text="${a.nome + ' (' + a.especie + ')'}"></option>
+            </select>
+            <span class="erro" th:if="${#fields.hasErrors('animal')}" th:errors="*{animal}"></span>
+
+            <label for="adotante">Adotante</label>
+            <select id="adotante" th:field="*{adotante.id}">
+                <option value="">Selecione...</option>
+                <option th:each="p : ${adotantes}" th:value="${p.id}" th:text="${p.nome}"></option>
+            </select>
+            <span class="erro" th:if="${#fields.hasErrors('adotante')}" th:errors="*{adotante}"></span>
+            <a th:href="@{/adotantes/novo}" class="link-pequeno">Adotante ainda não cadastrado? Cadastre aqui.</a>
+
+            <label for="observacoes">Observações</label>
+            <textarea id="observacoes" th:field="*{observacoes}" rows="4"></textarea>
+            <span class="erro" th:if="${#fields.hasErrors('observacoes')}" th:errors="*{observacoes}"></span>
+
+            <div class="botoes">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+                <a th:href="@{/adocoes}" class="btn btn-outline">Cancelar</a>
+            </div>
+        </form>
+    </main>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adoções - Área da ONG</title>
+    <link rel="icon" type="image/jpeg" th:href="@{/img/favicon.jpeg}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <header th:replace="~{fragmentos :: cabecalho}"></header>
+
+    <main class="container area-ong">
+        <nav th:replace="~{fragmentos :: menuOng}"></nav>
+
+        <h1>Adoções</h1>
+
+        <a th:href="@{/adocoes/novo}" class="btn btn-primary">Nova Adoção</a>
+
+        <table class="tabela">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Data</th>
+                    <th>Animal</th>
+                    <th>Adotante</th>
+                    <th>Observações</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="adocao : ${adocoes}">
+                    <td th:text="${adocao.id}"></td>
+                    <!-- #temporals.format mostra a data no formato brasileiro -->
+                    <td th:text="${#temporals.format(adocao.data, 'dd/MM/yyyy')}"></td>
+                    <!-- Pega o nome navegando pelo relacionamento: adocao -> animal -> nome -->
+                    <td th:text="${adocao.animal.nome}"></td>
+                    <td th:text="${adocao.adotante.nome}"></td>
+                    <td th:text="${adocao.observacoes}"></td>
+                    <td class="acoes">
+                        <a th:href="@{/adocoes/editar/{id}(id=${adocao.id})}">Editar</a>
+                        <a th:href="@{/adocoes/excluir/{id}(id=${adocao.id})}"
+                           onclick="return confirm('Excluir esta adoção?')">Excluir</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>

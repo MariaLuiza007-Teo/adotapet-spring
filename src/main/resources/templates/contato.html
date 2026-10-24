@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato</title>
+    <link rel="icon" type="image/jpeg" th:href="@{/img/favicon.jpeg}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <header th:replace="~{fragmentos :: cabecalho}"></header>
+
+    <main class="container">
+        <section class="contato-section">
+            <h2>Fale Conosco</h2>
+            <p>Quer adotar, ser voluntário ou ajudar com mantimentos? Preencha o formulário ou entre em contato direto pelos nossos canais.</p>
+
+            <ol class="dados-ong">
+                <li>Endereço: Rua Colores, nº 100, Centro - Itaituba, PA</li>
+                <li>WhatsApp: (00) 00000-0000</li>
+                <li>Pix: chave@ficticia.com</li>
+            </ol>
+
+            <form class="contato-form">
+                <label for="nome">Seu Nome</label>
+                <input type="text" id="nome" name="nome" placeholder="Digite o seu nome completo" required>
+
+                <label for="email">Seu Email</label>
+                <input type="email" id="email" name="email" placeholder="Digite o seu email" required>
+
+                <h3>Assunto</h3>
+                <ul class="opcoes-assunto">
+                    <li>
+                        <input type="radio" id="assunto-adocao" name="assunto" value="adocao" checked>
+                        <label for="assunto-adocao">Quero Adotar</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="assunto-doacao" name="assunto" value="doacao">
+                        <label for="assunto-doacao">Quero Doar Mantimentos</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="assunto-voluntario" name="assunto" value="voluntario">
+                        <label for="assunto-voluntario">Quero ser Voluntário</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="assunto-outros" name="assunto" value="outros">
+                        <label for="assunto-outros">Outros</label>
+                    </li>
+                </ul>
+
+                <label for="mensagem">Mensagem</label>
+                <textarea id="mensagem" name="mensagem" rows="5" placeholder="Como podemos ajudar?" required></textarea>
+
+                <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

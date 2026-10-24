@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animais para Adoção</title>
+    <link rel="icon" type="image/jpeg" th:href="@{/img/favicon.jpeg}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <header th:replace="~{fragmentos :: cabecalho}"></header>
+
+    <main class="container">
+        <!-- Antes eram 3 cards escritos à mão. Agora o th:each cria um card para cada animal do banco. -->
+        <section class="pets-grid">
+            <div class="card" th:each="animal : ${animais}">
+                <img th:if="${animal.foto != null and animal.foto != ''}"
+                     th:src="@{/img/{foto}(foto=${animal.foto})}"
+                     th:alt="'Foto de ' + ${animal.nome}">
+                <h3 th:text="${animal.nome}">Nome</h3>
+                <!-- Mesmo formato do site original: "Gato - Fêmea - 1 ano" (a idade só aparece se estiver preenchida) -->
+                <p th:text="${animal.especie + ' - ' + animal.sexo + (#strings.isEmpty(animal.idade) ? '' : ' - ' + animal.idade)}">Espécie - Sexo - Idade</p>
+                <!-- Abre o formulário de adoção com este animal já selecionado -->
+                <a th:href="@{/adocoes/novo(animalId=${animal.id})}" class="btn btn-primary">Quero Adotar</a>
+            </div>
+
+            <p th:if="${#lists.isEmpty(animais)}">No momento não há animais disponíveis para adoção.</p>
+        </section>
+    </main>
+</body>
+</html>

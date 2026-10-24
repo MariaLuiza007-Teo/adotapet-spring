@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adotante - Área da ONG</title>
+    <link rel="icon" type="image/jpeg" th:href="@{/img/favicon.jpeg}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <header th:replace="~{fragmentos :: cabecalho}"></header>
+
+    <main class="container area-ong">
+        <nav th:replace="~{fragmentos :: menuOng}"></nav>
+
+        <h1 th:text="${adotante.id == null} ? 'Novo Adotante' : 'Editar Adotante'"></h1>
+
+        <form th:action="@{/adotantes/salvar}" th:object="${adotante}" method="post" class="form-crud">
+            <input type="hidden" th:field="*{id}">
+
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" th:field="*{nome}">
+            <span class="erro" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+
+            <label for="email">E-mail</label>
+            <!-- type="text" de propósito: assim quem valida o e-mail é o @Email do Java, e não o navegador -->
+            <input type="text" id="email" th:field="*{email}">
+            <span class="erro" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+
+            <label for="telefone">Telefone</label>
+            <input type="text" id="telefone" th:field="*{telefone}" placeholder="(00) 00000-0000">
+            <span class="erro" th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}"></span>
+
+            <label for="cidade">Cidade</label>
+            <input type="text" id="cidade" th:field="*{cidade}">
+
+            <div class="botoes">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+                <a th:href="@{/adotantes}" class="btn btn-outline">Cancelar</a>
+            </div>
+        </form>
+    </main>
+</body>
+</html>

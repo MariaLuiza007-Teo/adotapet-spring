@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal - Área da ONG</title>
+    <link rel="icon" type="image/jpeg" th:href="@{/img/favicon.jpeg}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <header th:replace="~{fragmentos :: cabecalho}"></header>
+
+    <main class="container area-ong">
+        <nav th:replace="~{fragmentos :: menuOng}"></nav>
+
+        <!-- O mesmo formulário serve para criar e editar: se o id é nulo, é um animal novo -->
+        <h1 th:text="${animal.id == null} ? 'Novo Animal' : 'Editar Animal'"></h1>
+
+        <form th:action="@{/animais/salvar}" th:object="${animal}" method="post" class="form-crud">
+            <!-- Campo escondido: na edição, leva o id de volta para o controller -->
+            <input type="hidden" th:field="*{id}">
+
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" th:field="*{nome}">
+            <span class="erro" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+
+            <label for="especie">Espécie</label>
+            <input type="text" id="especie" th:field="*{especie}" placeholder="Ex.: Cachorro, Gato">
+            <span class="erro" th:if="${#fields.hasErrors('especie')}" th:errors="*{especie}"></span>
+
+            <label for="sexo">Sexo</label>
+            <select id="sexo" th:field="*{sexo}">
+                <option value="">Selecione...</option>
+                <option value="Macho">Macho</option>
+                <option value="Fêmea">Fêmea</option>
+            </select>
+            <span class="erro" th:if="${#fields.hasErrors('sexo')}" th:errors="*{sexo}"></span>
+
+            <label for="idade">Idade</label>
+            <input type="text" id="idade" th:field="*{idade}" placeholder="Ex.: 3 meses, 1 ano">
+
+            <label for="foto">Foto (nome do arquivo em static/img)</label>
+            <input type="text" id="foto" th:field="*{foto}" placeholder="Ex.: luna.jpeg">
+
+            <label for="status">Status</label>
+            <select id="status" th:field="*{status}">
+                <option th:each="s : ${statusList}" th:value="${s}" th:text="${s.descricao}"></option>
+            </select>
+            <span class="erro" th:if="${#fields.hasErrors('status')}" th:errors="*{status}"></span>
+
+            <div class="botoes">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+                <a th:href="@{/animais}" class="btn btn-outline">Cancelar</a>
+            </div>
+        </form>
+    </main>
+</body>
+</html>

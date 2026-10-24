@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<!--
+    Pedaços de HTML que se repetem em várias páginas.
+    Em vez de copiar o menu em todos os arquivos, cada página usa:
+    <header th:replace="~{fragmentos :: cabecalho}"></header>
+-->
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+    <!-- Menu principal do site (o mesmo do site original + "Área da ONG") -->
+    <header th:fragment="cabecalho">
+        <nav class="container">
+            <h2 class="logo">O Sol Nasce para Todos</h2>
+            <ul class="nav-links">
+                <li><a th:href="@{/}">Início</a></li>
+                <li><a th:href="@{/pets}">Animais</a></li>
+                <li><a th:href="@{/sobre}">Nossa História</a></li>
+                <li><a th:href="@{/contato}">Contato</a></li>
+                <li><a th:href="@{/animais}">Área da ONG</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Menu das telas de cadastro (as três tabelas) -->
+    <nav th:fragment="menuOng" class="menu-ong">
+        <a th:href="@{/animais}" class="btn btn-outline">Animais</a>
+        <a th:href="@{/adotantes}" class="btn btn-outline">Adotantes</a>
+        <a th:href="@{/adocoes}" class="btn btn-outline">Adoções</a>
+    </nav>
+
+</body>
+</html>

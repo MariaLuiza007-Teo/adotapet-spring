@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossa História</title>
+    <link rel="icon" type="image/jpeg" th:href="@{/img/favicon.jpeg}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <header th:replace="~{fragmentos :: cabecalho}"></header>
+
+    <main class="container">
+        <section class="sobre-section">
+            <h2>Nossa História</h2>
+            <p>O Sol Nasce Para Todos é uma organização de proteção animal presente em Itaituba (PA), dedicada ao acolhimento e cuidado de animais em situação de vulnerabilidade, promovendo o bem-estar e a adoção responsável.</p>
+            <p>Este site foi inspirado na história e no trabalho da ONG, mas é um projeto totalmente fictício e acadêmico, desenvolvido exclusivamente para praticar HTML e CSS, sem vínculo oficial com a instituição.</p>
+            <img th:src="@{/img/equipe.jpeg}" alt="Foto da equipe O Sol Nasce para Todos">
+        </section>
+    </main>
+</body>
+</html>

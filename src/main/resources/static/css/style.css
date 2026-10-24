@@ -1,0 +1,317 @@
+:root {
+    --color-primary: #FFB800; 
+    --color-dark: #F3F4F6;
+    --color-text: #121212; 
+    --font-main: 'Segoe UI', system-ui, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--color-dark);
+    color: var(--color-text);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+header {
+    padding: 20px 0;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: var(--color-primary);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.hero {
+    padding: 80px 0;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    color: var(--color-primary);
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+}
+
+.hero .btn {
+    margin: 0 5px;
+}
+
+.btn {
+    padding: 12px 24px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-dark);
+}
+
+.btn-outline {
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+}
+
+/* PÁGINA DE ADOÇÃO */
+.pets-grid {
+    display: flex; 
+    flex-wrap: wrap;
+    gap: 30px; 
+    padding: 60px 0;
+}
+
+.card {
+    border: 1px solid var(--color-primary);
+    width: 300px; 
+}
+
+.card img {
+    width: 100%;       
+    height: 200px;      
+    object-fit: cover; 
+}
+
+.card h3 {
+    color: var(--color-primary);
+}
+
+.card p {
+    margin-bottom: 15px;
+}
+
+.card .btn {
+    display: block;
+    text-align: center;
+}
+
+/* PÁGINA SOBRE */
+.sobre-section {
+    max-width: 800px;
+    padding: 60px 0;
+}
+
+.sobre-section h2 {
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    margin-bottom: 25px;
+}
+
+.sobre-section p {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+.sobre-section img {
+    width: 100%;
+}
+
+/* PÁGINA DE CONTATO */
+.contato-section {
+    max-width: 600px;
+    padding: 60px 0;
+}
+
+.contato-section h2 {
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    margin-bottom: 20px;
+}
+
+.contato-section p {
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+}
+
+.dados-ong {
+    padding-left: 25px;
+    margin-bottom: 30px;
+}
+
+.dados-ong li {
+    margin-bottom: 15px;
+}
+
+.contato-form {
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px;
+}
+
+.contato-form > label,
+.contato-form > h3 {
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--color-primary);
+    margin-top: 10px;
+}
+
+.contato-form input,
+.contato-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--color-primary);
+    background-color: var(--color-dark);
+    color: var(--color-text);
+    font-family: var(--font-main);
+    font-size: 1rem;
+}
+
+.opcoes-assunto {
+    list-style: none;
+}
+
+.opcoes-assunto li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.contato-form .opcoes-assunto input {
+    width: auto;
+}
+
+.contato-form button {
+    border: none;
+    font-family: var(--font-main);
+    font-size: 1.1rem;
+    margin-top: 10px;
+}
+
+/* ÁREA DA ONG (telas de cadastro) */
+.area-ong {
+    padding: 40px 20px 60px;
+}
+
+.area-ong h1 {
+    color: var(--color-primary);
+    margin: 20px 0;
+}
+
+/* justify-content: o "nav" do site espalha os itens (space-between); aqui eles ficam juntos à esquerda */
+.menu-ong {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.menu-ong .btn,
+.botoes .btn {
+    display: inline-block;
+}
+
+.tabela {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+    background-color: #FFFFFF;
+}
+
+.tabela th,
+.tabela td {
+    border: 1px solid var(--color-primary);
+    padding: 10px;
+    text-align: left;
+}
+
+.tabela th {
+    background-color: var(--color-primary);
+    color: var(--color-text);
+}
+
+.acoes a {
+    color: var(--color-text);
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.form-crud {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 600px;
+}
+
+.form-crud label {
+    font-weight: bold;
+    color: var(--color-primary);
+    margin-top: 10px;
+}
+
+.form-crud input,
+.form-crud select,
+.form-crud textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--color-primary);
+    background-color: #FFFFFF;
+    color: var(--color-text);
+    font-family: var(--font-main);
+    font-size: 1rem;
+}
+
+.form-crud button {
+    border: none;
+    font-family: var(--font-main);
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.botoes {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.erro {
+    color: #C0392B;
+    font-size: 0.9rem;
+}
+
+.alerta {
+    background-color: #FDECEA;
+    border: 1px solid #C0392B;
+    color: #C0392B;
+    padding: 12px;
+    margin-bottom: 20px;
+}
+
+.link-pequeno {
+    font-size: 0.9rem;
+    color: var(--color-text);
+}

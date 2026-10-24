@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animais - Área da ONG</title>
+    <link rel="icon" type="image/jpeg" th:href="@{/img/favicon.jpeg}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <header th:replace="~{fragmentos :: cabecalho}"></header>
+
+    <main class="container area-ong">
+        <nav th:replace="~{fragmentos :: menuOng}"></nav>
+
+        <h1>Animais</h1>
+
+        <!-- Aviso enviado pelo controller quando a exclusão é bloqueada -->
+        <p class="alerta" th:if="${erro}" th:text="${erro}"></p>
+
+        <a th:href="@{/animais/novo}" class="btn btn-primary">Novo Animal</a>
+
+        <table class="tabela">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Espécie</th>
+                    <th>Sexo</th>
+                    <th>Idade</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="animal : ${animais}">
+                    <td th:text="${animal.id}"></td>
+                    <td th:text="${animal.nome}"></td>
+                    <td th:text="${animal.especie}"></td>
+                    <td th:text="${animal.sexo}"></td>
+                    <td th:text="${animal.idade}"></td>
+                    <td th:text="${animal.status.descricao}"></td>
+                    <td class="acoes">
+                        <a th:href="@{/animais/editar/{id}(id=${animal.id})}">Editar</a>
+                        <a th:href="@{/animais/excluir/{id}(id=${animal.id})}"
+                           onclick="return confirm('Excluir este animal?')">Excluir</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>

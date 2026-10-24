@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adotantes - Área da ONG</title>
+    <link rel="icon" type="image/jpeg" th:href="@{/img/favicon.jpeg}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <header th:replace="~{fragmentos :: cabecalho}"></header>
+
+    <main class="container area-ong">
+        <nav th:replace="~{fragmentos :: menuOng}"></nav>
+
+        <h1>Adotantes</h1>
+
+        <a th:href="@{/adotantes/novo}" class="btn btn-primary">Novo Adotante</a>
+
+        <table class="tabela">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                    <th>Telefone</th>
+                    <th>Cidade</th>
+                    <th>Adoções</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="adotante : ${adotantes}">
+                    <td th:text="${adotante.id}"></td>
+                    <td th:text="${adotante.nome}"></td>
+                    <td th:text="${adotante.email}"></td>
+                    <td th:text="${adotante.telefone}"></td>
+                    <td th:text="${adotante.cidade}"></td>
+                    <!-- Usa o @OneToMany: quantas adoções este adotante tem -->
+                    <td th:text="${adotante.adocoes.size()}"></td>
+                    <td class="acoes">
+                        <a th:href="@{/adotantes/editar/{id}(id=${adotante.id})}">Editar</a>
+                        <a th:href="@{/adotantes/excluir/{id}(id=${adotante.id})}"
+                           onclick="return confirm('Excluir este adotante? As adoções dele também serão excluídas.')">Excluir</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>
