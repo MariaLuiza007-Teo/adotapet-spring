@@ -181,6 +181,7 @@ nav {
 }
 
 .contato-form input,
+.contato-form select,
 .contato-form textarea {
     width: 100%;
     padding: 12px;
@@ -189,20 +190,6 @@ nav {
     color: var(--color-text);
     font-family: var(--font-main);
     font-size: 1rem;
-}
-
-.opcoes-assunto {
-    list-style: none;
-}
-
-.opcoes-assunto li {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.contato-form .opcoes-assunto input {
-    width: auto;
 }
 
 .contato-form button {
@@ -301,6 +288,14 @@ nav {
 .erro {
     color: #C0392B;
     font-size: 0.9rem;
+}
+
+.sucesso {
+    background-color: #E8F6EC;
+    border: 1px solid #1E7B3A;
+    color: #1E7B3A;
+    padding: 12px;
+    margin-bottom: 20px;
 }
 
 .alerta {

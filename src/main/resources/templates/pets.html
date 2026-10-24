@@ -20,8 +20,8 @@
                 <h3 th:text="${animal.nome}">Nome</h3>
                 <!-- Mesmo formato do site original: "Gato - Fêmea - 1 ano" (a idade só aparece se estiver preenchida) -->
                 <p th:text="${animal.especie + ' - ' + animal.sexo + (#strings.isEmpty(animal.idade) ? '' : ' - ' + animal.idade)}">Espécie - Sexo - Idade</p>
-                <!-- Abre o formulário de adoção com este animal já selecionado -->
-                <a th:href="@{/adocoes/novo(animalId=${animal.id})}" class="btn btn-primary">Quero Adotar</a>
+                <!-- Vai para o contato com este animal já selecionado no formulário -->
+                <a th:href="@{/contato(animalId=${animal.id})}" class="btn btn-primary">Quero Adotar</a>
             </div>
 
             <p th:if="${#lists.isEmpty(animais)}">No momento não há animais disponíveis para adoção.</p>

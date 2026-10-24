@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ong.adotapet.model.Adocao;
 import com.ong.adotapet.model.Animal;
@@ -44,16 +43,11 @@ public class AdocaoController {
         return "adocoes/listar";
     }
 
-    // O botão "Quero Adotar" da página /pets chama /adocoes/novo?animalId=3.
-    // required = false: se o animalId não vier, o formulário abre sem animal selecionado.
     @GetMapping("/novo")
-    public String novo(@RequestParam(required = false) Long animalId, Model model) {
+    public String novo(Model model) {
         Adocao adocao = new Adocao();
+        // O formulário já abre com a data de hoje preenchida
         adocao.setData(LocalDate.now());
-
-        if (animalId != null) {
-            animalRepository.findById(animalId).ifPresent(adocao::setAnimal);
-        }
 
         model.addAttribute("adocao", adocao);
         carregarListas(model, adocao);

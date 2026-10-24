@@ -13,7 +13,7 @@
     <main class="container">
         <section class="contato-section">
             <h2>Fale Conosco</h2>
-            <p>Quer adotar, ser voluntário ou ajudar com mantimentos? Preencha o formulário ou entre em contato direto pelos nossos canais.</p>
+            <p>Quer adotar? Preencha o formulário abaixo. Para doar ou ser voluntário, fale com a gente pelos nossos canais.</p>
 
             <ol class="dados-ong">
                 <li>Endereço: Rua Colores, nº 100, Centro - Itaituba, PA</li>
@@ -21,37 +21,44 @@
                 <li>Pix: chave@ficticia.com</li>
             </ol>
 
-            <form class="contato-form">
+            <!-- Mensagem mostrada depois que o pedido é salvo -->
+            <p class="sucesso" th:if="${sucesso}" th:text="${sucesso}"></p>
+
+            <!--
+                Formulário de adoção: os campos da pessoa vão para a tabela Adotante (th:object),
+                e o animal + a mensagem são usados para criar a Adocao no controller.
+            -->
+            <form th:action="@{/contato}" th:object="${adotante}" method="post" class="contato-form">
+                <label for="animalId">Animal que deseja adotar</label>
+                <select id="animalId" name="animalId">
+                    <option value="">Selecione...</option>
+                    <option th:each="a : ${animais}" th:value="${a.id}"
+                            th:selected="${a.id == animalId}"
+                            th:text="${a.nome + ' (' + a.especie + ')'}"></option>
+                </select>
+                <span class="erro" th:if="${erroAnimal}" th:text="${erroAnimal}"></span>
+
                 <label for="nome">Seu Nome</label>
-                <input type="text" id="nome" name="nome" placeholder="Digite o seu nome completo" required>
+                <input type="text" id="nome" th:field="*{nome}" placeholder="Digite o seu nome completo">
+                <span class="erro" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
 
                 <label for="email">Seu Email</label>
-                <input type="email" id="email" name="email" placeholder="Digite o seu email" required>
+                <input type="email" id="email" th:field="*{email}" placeholder="Digite o seu email">
+                <span class="erro" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
 
-                <h3>Assunto</h3>
-                <ul class="opcoes-assunto">
-                    <li>
-                        <input type="radio" id="assunto-adocao" name="assunto" value="adocao" checked>
-                        <label for="assunto-adocao">Quero Adotar</label>
-                    </li>
-                    <li>
-                        <input type="radio" id="assunto-doacao" name="assunto" value="doacao">
-                        <label for="assunto-doacao">Quero Doar Mantimentos</label>
-                    </li>
-                    <li>
-                        <input type="radio" id="assunto-voluntario" name="assunto" value="voluntario">
-                        <label for="assunto-voluntario">Quero ser Voluntário</label>
-                    </li>
-                    <li>
-                        <input type="radio" id="assunto-outros" name="assunto" value="outros">
-                        <label for="assunto-outros">Outros</label>
-                    </li>
-                </ul>
+                <label for="telefone">Seu Telefone</label>
+                <input type="text" id="telefone" th:field="*{telefone}" placeholder="(00) 00000-0000">
+                <span class="erro" th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}"></span>
+
+                <label for="cidade">Sua Cidade</label>
+                <input type="text" id="cidade" th:field="*{cidade}" placeholder="Ex.: Itaituba">
 
                 <label for="mensagem">Mensagem</label>
-                <textarea id="mensagem" name="mensagem" rows="5" placeholder="Como podemos ajudar?" required></textarea>
+                <!-- maxlength: a mensagem vira as "observações" da adoção, que guardam até 255 caracteres -->
+                <textarea id="mensagem" name="mensagem" rows="5" maxlength="255"
+                          placeholder="Conte um pouco sobre você e sua casa" th:text="${mensagem}"></textarea>
 
-                <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+                <button type="submit" class="btn btn-primary">Enviar Pedido de Adoção</button>
             </form>
         </section>
     </main>
