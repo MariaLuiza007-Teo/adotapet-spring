@@ -50,7 +50,6 @@ public class AdotanteController {
         return "adotantes/formulario";
     }
 
-    // Por causa do CascadeType.REMOVE em Adotante, as adoções dele são excluídas junto
     @GetMapping("/excluir/{id}")
     public String excluir(@PathVariable Long id) {
         Adotante adotante = adotanteRepository.findById(id)

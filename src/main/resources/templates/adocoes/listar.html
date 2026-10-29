@@ -31,9 +31,7 @@
             <tbody>
                 <tr th:each="adocao : ${adocoes}">
                     <td th:text="${adocao.id}"></td>
-                    <!-- #temporals.format mostra a data no formato brasileiro -->
                     <td th:text="${#temporals.format(adocao.data, 'dd/MM/yyyy')}"></td>
-                    <!-- Pega o nome navegando pelo relacionamento: adocao -> animal -> nome -->
                     <td th:text="${adocao.animal.nome}"></td>
                     <td th:text="${adocao.adotante.nome}"></td>
                     <td th:text="${adocao.observacoes}"></td>

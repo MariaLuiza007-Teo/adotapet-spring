@@ -21,13 +21,8 @@
                 <li>Pix: chave@ficticia.com</li>
             </ol>
 
-            <!-- Mensagem mostrada depois que o pedido é salvo -->
             <p class="sucesso" th:if="${sucesso}" th:text="${sucesso}"></p>
 
-            <!--
-                Formulário de adoção: os campos da pessoa vão para a tabela Adotante (th:object),
-                e o animal + a mensagem são usados para criar a Adocao no controller.
-            -->
             <form th:action="@{/contato}" th:object="${adotante}" method="post" class="contato-form">
                 <label for="animalId">Animal que deseja adotar</label>
                 <select id="animalId" name="animalId">
@@ -54,7 +49,6 @@
                 <input type="text" id="cidade" th:field="*{cidade}" placeholder="Ex.: Itaituba">
 
                 <label for="mensagem">Mensagem</label>
-                <!-- maxlength: a mensagem vira as "observações" da adoção, que guardam até 255 caracteres -->
                 <textarea id="mensagem" name="mensagem" rows="5" maxlength="255"
                           placeholder="Conte um pouco sobre você e sua casa" th:text="${mensagem}"></textarea>
 

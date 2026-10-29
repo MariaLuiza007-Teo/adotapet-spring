@@ -199,7 +199,7 @@ nav {
     margin-top: 10px;
 }
 
-/* ÁREA DA ONG (telas de cadastro) */
+/* ÁREA DA ONG */
 .area-ong {
     padding: 40px 20px 60px;
 }
@@ -209,7 +209,6 @@ nav {
     margin: 20px 0;
 }
 
-/* justify-content: o "nav" do site espalha os itens (space-between); aqui eles ficam juntos à esquerda */
 .menu-ong {
     display: flex;
     justify-content: flex-start;

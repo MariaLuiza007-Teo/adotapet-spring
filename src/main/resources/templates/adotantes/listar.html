@@ -36,7 +36,6 @@
                     <td th:text="${adotante.email}"></td>
                     <td th:text="${adotante.telefone}"></td>
                     <td th:text="${adotante.cidade}"></td>
-                    <!-- Usa o @OneToMany: quantas adoções este adotante tem -->
                     <td th:text="${adotante.adocoes.size()}"></td>
                     <td class="acoes">
                         <a th:href="@{/adotantes/editar/{id}(id=${adotante.id})}">Editar</a>

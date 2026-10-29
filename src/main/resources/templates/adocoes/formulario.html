@@ -22,10 +22,6 @@
             <input type="date" id="data" th:field="*{data}">
             <span class="erro" th:if="${#fields.hasErrors('data')}" th:errors="*{data}"></span>
 
-            <!--
-                Correção do roteiro: o th:field aponta para o ID do animal (animal.id)
-                e cada <option> tem como valor o ID (a.id), e não o objeto inteiro.
-            -->
             <label for="animal">Animal</label>
             <select id="animal" th:field="*{animal.id}">
                 <option value="">Selecione...</option>

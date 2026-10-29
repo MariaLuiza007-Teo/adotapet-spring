@@ -30,12 +30,6 @@ public class Adotante {
 
     private String cidade;
 
-    // Um adotante pode ter várias adoções.
-    // mappedBy = "adotante": quem guarda a chave estrangeira é a classe Adocao.
-    // CascadeType.REMOVE: ao excluir o adotante, as adoções dele também são excluídas.
-    // Diferente do roteiro, aqui NÃO usamos orphanRemoval = true: o formulário de
-    // edição chega com essa lista vazia, e o orphanRemoval apagaria as adoções
-    // do adotante toda vez que ele fosse editado.
     @OneToMany(mappedBy = "adotante", cascade = CascadeType.REMOVE)
     private List<Adocao> adocoes = new ArrayList<>();
 

@@ -28,8 +28,6 @@ public class AnimalController {
     @Autowired
     private AdocaoRepository adocaoRepository;
 
-    // Este método roda antes de toda rota deste controller e coloca
-    // a lista de status (DISPONIVEL, ADOTADO) no model, para o <select> do formulário.
     @ModelAttribute("statusList")
     public StatusAnimal[] statusList() {
         return StatusAnimal.values();
@@ -49,7 +47,6 @@ public class AnimalController {
 
     @PostMapping("/salvar")
     public String salvar(@Valid Animal animal, BindingResult result) {
-        // Se alguma validação falhou, volta para o formulário mostrando os erros
         if (result.hasErrors()) {
             return "animais/formulario";
         }
@@ -70,8 +67,6 @@ public class AnimalController {
         Animal animal = animalRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("ID inválido: " + id));
 
-        // Regra da ONG: um animal que já tem adoção registrada não pode ser apagado.
-        // O addFlashAttribute guarda a mensagem para a próxima tela (a listagem).
         if (adocaoRepository.existsByAnimalId(id)) {
             redirectAttributes.addFlashAttribute("erro",
                     "Não é possível excluir " + animal.getNome() + ": este animal já foi adotado.");

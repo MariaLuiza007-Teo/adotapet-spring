@@ -15,9 +15,6 @@ public class AdotapetApplication {
 		SpringApplication.run(AdotapetApplication.class, args);
 	}
 
-	// Dados iniciais: o H2 é apagado toda vez que a aplicação reinicia.
-	// O CommandLineRunner roda uma vez, logo depois que a aplicação sobe,
-	// e cadastra os três animais que já estavam no site.
 	@Bean
 	CommandLineRunner dadosIniciais(AnimalRepository animalRepository) {
 		return args -> {

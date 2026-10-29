@@ -22,8 +22,6 @@ import com.ong.adotapet.repository.AnimalRepository;
 
 import jakarta.validation.Valid;
 
-// Segue o modelo do CarroController do roteiro,
-// mas o formulário precisa de DUAS listas: animais e adotantes.
 @Controller
 @RequestMapping("/adocoes")
 public class AdocaoController {
@@ -46,7 +44,6 @@ public class AdocaoController {
     @GetMapping("/novo")
     public String novo(Model model) {
         Adocao adocao = new Adocao();
-        // O formulário já abre com a data de hoje preenchida
         adocao.setData(LocalDate.now());
 
         model.addAttribute("adocao", adocao);
@@ -56,9 +53,6 @@ public class AdocaoController {
 
     @PostMapping("/salvar")
     public String salvar(@Valid Adocao adocao, BindingResult result, Model model) {
-        // O <select> envia só o id (animal.id). Se a pessoa deixar "Selecione...",
-        // o Spring cria um Animal vazio, sem id, e o @NotNull não percebe.
-        // Por isso conferimos o id aqui na mão.
         if (adocao.getAnimal() != null && adocao.getAnimal().getId() == null) {
             result.rejectValue("animal", "NotNull", "Selecione um animal");
         }
@@ -67,7 +61,6 @@ public class AdocaoController {
         }
 
         if (result.hasErrors()) {
-            // Ao voltar para o formulário, as listas dos <select> precisam ser carregadas de novo
             carregarListas(model, adocao);
             return "adocoes/formulario";
         }
@@ -92,12 +85,9 @@ public class AdocaoController {
         return "redirect:/adocoes";
     }
 
-    // Coloca no model as listas usadas nos dois <select> do formulário
     private void carregarListas(Model model, Adocao adocao) {
         List<Animal> animais = new ArrayList<>(animalRepository.findByStatus(StatusAnimal.DISPONIVEL));
 
-        // Na edição, o animal desta adoção provavelmente já está como ADOTADO.
-        // Ele precisa continuar na lista, senão o <select> perde a seleção.
         if (adocao.getAnimal() != null && adocao.getAnimal().getId() != null) {
             Animal atual = animalRepository.findById(adocao.getAnimal().getId()).orElse(null);
             if (atual != null && atual.getStatus() != StatusAnimal.DISPONIVEL) {

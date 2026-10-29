@@ -23,7 +23,6 @@
             <span class="erro" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
 
             <label for="email">E-mail</label>
-            <!-- type="text" de propósito: assim quem valida o e-mail é o @Email do Java, e não o navegador -->
             <input type="text" id="email" th:field="*{email}">
             <span class="erro" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
 

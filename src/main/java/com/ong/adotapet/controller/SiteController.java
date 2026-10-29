@@ -21,7 +21,6 @@ import com.ong.adotapet.repository.AnimalRepository;
 
 import jakarta.validation.Valid;
 
-// Páginas públicas do site "O Sol Nasce para Todos"
 @Controller
 public class SiteController {
 
@@ -39,8 +38,6 @@ public class SiteController {
         return "index";
     }
 
-    // Antes os animais estavam escritos direto no HTML.
-    // Agora eles vêm do banco: só os que ainda estão disponíveis.
     @GetMapping("/pets")
     public String pets(Model model) {
         model.addAttribute("animais", animalRepository.findByStatus(StatusAnimal.DISPONIVEL));
@@ -52,9 +49,6 @@ public class SiteController {
         return "sobre";
     }
 
-    // Página de contato com o formulário de adoção.
-    // O botão "Quero Adotar" da página /pets chama /contato?animalId=3,
-    // e o formulário já abre com esse animal selecionado.
     @GetMapping("/contato")
     public String contato(@RequestParam(required = false) Long animalId, Model model) {
         model.addAttribute("adotante", new Adotante());
@@ -62,16 +56,12 @@ public class SiteController {
         return "contato";
     }
 
-    // Quando a pessoa envia o formulário, o sistema grava em DUAS tabelas:
-    // 1) Adotante, com os dados da pessoa;
-    // 2) Adocao, ligando essa pessoa ao animal escolhido.
     @PostMapping("/contato")
     public String enviarPedido(@Valid Adotante adotante, BindingResult result,
                                @RequestParam(required = false) Long animalId,
                                @RequestParam(required = false) String mensagem,
                                Model model, RedirectAttributes redirectAttributes) {
 
-        // O animal não faz parte do Adotante, então conferimos ele à parte
         Animal animal = null;
         if (animalId != null) {
             animal = animalRepository.findById(animalId).orElse(null);
@@ -81,7 +71,6 @@ public class SiteController {
             if (animal == null) {
                 model.addAttribute("erroAnimal", "Escolha o animal que deseja adotar");
             }
-            // Devolve o que a pessoa já tinha escolhido e escrito, para não perder
             model.addAttribute("mensagem", mensagem);
             carregarAnimais(model, animalId);
             return "contato";
@@ -101,7 +90,6 @@ public class SiteController {
         return "redirect:/contato";
     }
 
-    // Lista de animais para o <select> e qual deles deve vir selecionado
     private void carregarAnimais(Model model, Long animalId) {
         model.addAttribute("animais", animalRepository.findByStatus(StatusAnimal.DISPONIVEL));
         model.addAttribute("animalId", animalId);

@@ -14,8 +14,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
 
-// Tabela que liga um Animal a um Adotante.
-// No roteiro, Carro se liga só a Marca; aqui Adocao se liga a DUAS tabelas.
 @Entity
 public class Adocao {
 
@@ -23,23 +21,19 @@ public class Adocao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // @DateTimeFormat ensina o Spring a ler a data no formato do <input type="date"> (aaaa-mm-dd)
     @NotNull(message = "A data é obrigatória")
     @PastOrPresent(message = "A data não pode estar no futuro")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate data;
 
-    // O banco guarda até 255 caracteres por padrão, então limitamos aqui também
     @Size(max = 255, message = "As observações podem ter no máximo 255 caracteres")
     private String observacoes;
 
-    // Muitas adoções podem apontar para o mesmo animal
     @ManyToOne
     @JoinColumn(name = "animal_id")
     @NotNull(message = "Selecione um animal")
     private Animal animal;
 
-    // Muitas adoções podem apontar para o mesmo adotante
     @ManyToOne
     @JoinColumn(name = "adotante_id")
     @NotNull(message = "Selecione um adotante")

@@ -13,11 +13,9 @@
     <main class="container area-ong">
         <nav th:replace="~{fragmentos :: menuOng}"></nav>
 
-        <!-- O mesmo formulário serve para criar e editar: se o id é nulo, é um animal novo -->
         <h1 th:text="${animal.id == null} ? 'Novo Animal' : 'Editar Animal'"></h1>
 
         <form th:action="@{/animais/salvar}" th:object="${animal}" method="post" class="form-crud">
-            <!-- Campo escondido: na edição, leva o id de volta para o controller -->
             <input type="hidden" th:field="*{id}">
 
             <label for="nome">Nome</label>

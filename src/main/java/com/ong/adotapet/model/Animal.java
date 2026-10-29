@@ -25,22 +25,17 @@ public class Animal {
     @NotBlank(message = "O sexo é obrigatório")
     private String sexo;
 
-    // Texto livre, ex.: "3 meses" ou "1 ano"
     private String idade;
 
-    // Nome do arquivo da foto que está em static/img, ex.: "luna.jpeg"
     private String foto;
 
-    // Salva no banco o nome do enum ("DISPONIVEL"), e não o número da posição
     @Enumerated(EnumType.STRING)
     @NotNull(message = "O status é obrigatório")
     private StatusAnimal status = StatusAnimal.DISPONIVEL;
 
-    // Construtor vazio: obrigatório para o JPA
     public Animal() {
     }
 
-    // Construtor usado para cadastrar os dados iniciais
     public Animal(String nome, String especie, String sexo, String idade, String foto) {
         this.nome = nome;
         this.especie = especie;
